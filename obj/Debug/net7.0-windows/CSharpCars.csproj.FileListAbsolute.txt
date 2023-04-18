@@ -1,0 +1,15 @@
+C:\Users\vitor.ramos\Desktop\CSharpCars\bin\Debug\net7.0-windows\CSharpCars.exe
+C:\Users\vitor.ramos\Desktop\CSharpCars\bin\Debug\net7.0-windows\CSharpCars.deps.json
+C:\Users\vitor.ramos\Desktop\CSharpCars\bin\Debug\net7.0-windows\CSharpCars.runtimeconfig.json
+C:\Users\vitor.ramos\Desktop\CSharpCars\bin\Debug\net7.0-windows\CSharpCars.dll
+C:\Users\vitor.ramos\Desktop\CSharpCars\bin\Debug\net7.0-windows\CSharpCars.pdb
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.csproj.AssemblyReference.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.AssemblyInfoInputs.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.AssemblyInfo.cs
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.csproj.CoreCompileInputs.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.dll
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\refint\CSharpCars.dll
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.pdb
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.genruntimeconfig.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\obj\Debug\net7.0-windows\ref\CSharpCars.dll
