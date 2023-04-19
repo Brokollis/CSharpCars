@@ -1,39 +1,35 @@
 
 namespace Views
 {
-    public class ExcluiProduto{
+    public class ExcluiProduto :Form{
 
-        public static void index(){
-            Form form = new Form();
+        public void DeleteCar(){
 
-            form.Text = "Excluir Produto";
-            form.Size = new Size(300, 300);
-            form.StartPosition = FormStartPosition.CenterScreen;
-            form.FormBorderStyle = FormBorderStyle.FixedSingle;
-            form.MaximizeBox = false;
-            form.MinimizeBox = false;
-            form.ShowIcon = false;
-            form.ShowInTaskbar = false;
+            this.Text = "Excluir Produto";
+            this.Size = new Size(500, 500);
+            this.StartPosition = FormStartPosition.CenterScreen;
 
-            Label lblNome = new Label();
-            lblNome.Text = "Nome";
-            lblNome.Size = new Size(100, 30);
-            lblNome.Location = new Point(10, 10);
+            Label lblId = new Label();
+            lblId.Text = "ID";
+            lblId.Location = new Point(10, 10);
+            lblId.Size = new Size(50, 20);
 
-            TextBox txtNome = new TextBox();
-            txtNome.Size = new Size(100, 30);
-            txtNome.Location = new Point(10, 40);
+            TextBox txtId = new TextBox();
+            txtId.Location = new Point(80, 10);
+            txtId.Size = new Size(150, 20);
 
-            Button btnExcluir = new Button();
+
+           Button btnExcluir = new Button();
             btnExcluir.Text = "Excluir";
-            btnExcluir.Size = new Size(100, 30);
-            btnExcluir.Location = new Point(10, 70);
-            form.Close();
-
-            form.Controls.Add(lblNome);
-            form.Controls.Add(txtNome);
-            form.Controls.Add(btnExcluir);
-            form.ShowDialog();
+            btnExcluir.Location = new Point(10, 40);
+            btnExcluir.Size = new Size(100, 20);
+            btnExcluir.Click += (sender, e) => {
+                int carId = int.Parse(txtId.Text);
+                Models.Car carToDelete = Controllers.CarController.ReadById(carId);
+                Controllers.CarController.Delete(carToDelete);
+                MessageBox.Show("Produto excluído com sucesso!");
+                this.Close();
+            };
 
         }
 

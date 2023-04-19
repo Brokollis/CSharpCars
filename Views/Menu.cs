@@ -1,11 +1,11 @@
-
 namespace Views
 {
-    public class Menu{
-        
-        public static void index(){
+    public class Menu : Form
+    {
+        public static void index()
+        {
             Form menu = new Form();
-            
+
             menu.Text = "Menu";
             menu.Size = new Size(300, 300);
             menu.StartPosition = FormStartPosition.CenterScreen;
@@ -21,7 +21,8 @@ namespace Views
             btnAdd.Location = new Point(100, 100);
             btnAdd.Click += (sender, e) => {
                 menu.Hide();
-                new Produto();
+                var produto = new Produto();
+                produto.ShowDialog();
                 menu.Show();
             };
 
@@ -36,11 +37,6 @@ namespace Views
             menu.Controls.Add(btnAdd);
             menu.Controls.Add(sair);
             menu.ShowDialog();
-
-
-            
-
-                    
         }
     }
 }
