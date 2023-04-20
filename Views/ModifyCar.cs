@@ -1,95 +1,37 @@
-using System;
-using System.Windows.Forms;
-using Controllers;
 using Models;
-
-namespace Views
-{
-    public class RegisterCar : Form
-    {
-        // public Label lblId;
-        // public TextBox txtId;
-        public Label lblBrand;
-        public TextBox txtBrand;
-        public Label lblModel;
-        public TextBox txtModel;
-        public Label lblYear;
-        public NumericUpDown numYear;
-        public Label lblColor;
-        public TextBox txtColor;
-        public Label lblLicensePlate;
-        public MaskedTextBox mskLicensePlate;
-        public Label lblType;
-        public ComboBox cboType;
-        public Label lblPrice;
-        public TextBox txtPrice;
-        public Button btnRegister;
-
-        public void btnRegister_Click(object sender, EventArgs e)
-        {
-            Models.Car car = new Car(
-                txtBrand.Text,
-                txtModel.Text,
-                (int)numYear.Value,
-                txtColor.Text,
-                mskLicensePlate.Text,
-                cboType.SelectedItem.ToString(),
-                Convert.ToSingle(txtPrice.Text)
-            );
-
-            CarController carController = new CarController();
-            carController.Create(car);
-
-            MessageBox.Show("Car registered successfully!");
-
-            ClearForm();
+using Controllers;
 
 
 
-            // atualiza a lista de carros na tela de Produto, se ela estiver aberta
-            Produto ProdutoList = Application.OpenForms.OfType<Produto>().FirstOrDefault();
-            if (ProdutoList != null)
-            {
-                ProdutoList.RefreshList();
-            }
 
-            // fecha a tela de cadastro
-            this.Close();
-        }
+namespace Views{
 
-        private void ClearForm()
-        {
-            // txtId.Clear();
-            txtBrand.Clear();
-            txtModel.Clear();
-            numYear.Value = DateTime.Now.Year;
-            txtColor.Clear();
-            mskLicensePlate.Clear();
-            cboType.SelectedIndex = 0;
-            txtPrice.Clear();
-        }
+    public class ModifyCar : Form{
+        private Label lblBrand;
+        private TextBox txtBrand;
+        private Label lblModel;
+        private TextBox txtModel;
+        private Label lblYear;
+        private NumericUpDown numYear;
+        private Label lblColor;
+        private TextBox txtColor;
+        private Label lblLicensePlate;
+        private MaskedTextBox mskLicensePlate;
+        private Label lblType;
+        private ComboBox cboType;
+        private Label lblPrice;
+        private TextBox txtPrice;
+        private Button btnModify;
+        private Button btnCancel;
+       
 
-        public RegisterCar()
-        {
-            this.Text = "Car Registration";
+    
+
+        public ModifyCar(){
+
+            this.Text = "Editar Produto";
+            this.Size = new Size(500, 500);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-            this.Size = new System.Drawing.Size(280, 360);
-
-            // this.lblId = new Label();
-            // this.lblId.Text = "Id:";
-            // this.lblId.Location = new System.Drawing.Point(10, 10);
-            // this.lblId.Size = new System.Drawing.Size(50, 20);
-            // this.Controls.Add(this.lblId);
-
-            // this.txtId = new TextBox();
-            // this.txtId.Location = new System.Drawing.Point(80, 10);
-            // this.txtId.Size = new System.Drawing.Size(150, 20);
-            // this.Controls.Add(this.txtId);
 
             this.lblBrand = new Label();
             this.lblBrand.Text = "Brand:";
@@ -159,14 +101,18 @@ namespace Views
             this.txtPrice.Location = new System.Drawing.Point(80, 220);
             this.txtPrice.Size = new System.Drawing.Size(150, 20);
 
-            this.btnRegister = new Button();
-            this.btnRegister.Text = "Register";
-            this.btnRegister.Location = new System.Drawing.Point(80, 260);
-            this.btnRegister.Size = new System.Drawing.Size(150, 35);
-            this.btnRegister.Click += new EventHandler(this.btnRegister_Click);
+            this.btnModify = new Button();
+            this.btnModify.Text = "Modify";
+            this.btnModify.Location = new System.Drawing.Point(10, 250);
+            this.btnModify.Size = new System.Drawing.Size(100, 30);
+            this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
 
-            // this.Controls.Add(this.lblId);
-            // this.Controls.Add(this.txtId);
+            this.btnCancel = new Button();
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Location = new System.Drawing.Point(120, 250);
+            this.btnCancel.Size = new System.Drawing.Size(100, 30);
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+
             this.Controls.Add(this.lblBrand);
             this.Controls.Add(this.txtBrand);
             this.Controls.Add(this.lblModel);
@@ -181,8 +127,52 @@ namespace Views
             this.Controls.Add(this.cboType);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.txtPrice);
-            this.Controls.Add(this.btnRegister);
-        }
-    }
+            this.Controls.Add(this.btnModify);
+            this.Controls.Add(this.btnCancel);
 
+        }
+
+        private void btnModify_Click(object sender, EventArgs e){
+            if (string.IsNullOrEmpty(this.txtBrand.Text) || string.IsNullOrEmpty(this.txtModel.Text) || string.IsNullOrEmpty(this.txtColor.Text) || string.IsNullOrEmpty(this.mskLicensePlate.Text) || string.IsNullOrEmpty(this.cboType.Text) || string.IsNullOrEmpty(this.txtPrice.Text)){
+                MessageBox.Show("Please fill all the fields");
+            }
+            else{
+                try{
+                    // Ler os dados do carro que se deseja modificar
+                    Car carToModify = Controllers.CarController.ReadById(selected );
+
+                    if (carToModify != null){
+                        carToModify.Brand = this.txtBrand.Text;
+                        carToModify.Model = this.txtModel.Text;
+                        carToModify.Year = Convert.ToInt32(this.numYear.Value);
+                        carToModify.Color = this.txtColor.Text;
+                        carToModify.LicensePlate = this.mskLicensePlate.Text;
+                        carToModify.Type = this.cboType.Text;
+                        carToModify.Price = Convert.ToSingle(this.txtPrice.Text);
+
+                        // Atualizar o objeto no banco de dados
+                        Controllers.CarController.Update(carToModify);
+
+                        MessageBox.Show("Car modified successfully");
+                        this.Close();
+                    }
+                    else{
+                        MessageBox.Show("Car not found in the database");
+                    }
+                }
+                catch (Exception ex){
+                    MessageBox.Show("Error: " + ex.Message);
+                }
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+
+
+
+    }
 }

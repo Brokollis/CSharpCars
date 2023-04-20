@@ -1,3 +1,6 @@
+using Models;
+using Controllers;
+
 namespace Views
 {
     public class Menu : Form
@@ -7,7 +10,7 @@ namespace Views
             Form menu = new Form();
 
             menu.Text = "Menu";
-            menu.Size = new Size(300, 300);
+            menu.Size = new Size(250, 200);
             menu.StartPosition = FormStartPosition.CenterScreen;
             menu.FormBorderStyle = FormBorderStyle.FixedSingle;
             menu.MaximizeBox = false;
@@ -17,8 +20,8 @@ namespace Views
 
             Button btnAdd = new Button();
             btnAdd.Text = "Produto";
-            btnAdd.Size = new Size(100, 30);
-            btnAdd.Location = new Point(100, 100);
+            btnAdd.Size = new Size(150, 35);
+            btnAdd.Location = new Point(40, 40);
             btnAdd.Click += (sender, e) => {
                 menu.Hide();
                 var produto = new Produto();
@@ -28,8 +31,8 @@ namespace Views
 
             Button sair = new Button();
             sair.Text = "Sair";
-            sair.Size = new Size(100, 30);
-            sair.Location = new Point(100, 150);
+            sair.Size = new Size(150, 35);
+            sair.Location = new Point(40, 85);
             sair.Click += (sender, e) => {
                 menu.Close();
             };

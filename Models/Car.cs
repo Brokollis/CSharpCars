@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Models
 {
     public class Car{
-        [Column("IdCar")]        
+        [Column("IdCar")]
+        [System.ComponentModel.DataAnnotations.Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]        
         public int Id { get; set; }
 
         [Column("BrandCar")]
@@ -30,8 +32,7 @@ namespace Models
 
 
         
-        public Car(int Id, string Brand, string Model, int Year, string Color, string LicensePlate, string Type, float Price){
-            this.Id = Id;
+        public Car(string Brand, string Model, int Year, string Color, string LicensePlate, string Type, float Price){
             this.Brand = Brand;
             this.Model = Model;
             this.Year = Year;

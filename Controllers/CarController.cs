@@ -24,9 +24,19 @@ namespace Controllers
         {
             using (var context = new CarContext())
             {
-                return context.Cars.Find(id);
+                var car = context.Cars.Find(id);
+                if (car == null)
+                {
+                    throw new ArgumentException("Carro não encontrado");
+                }
+                else
+                {
+                    return car;
+                }
             }
         }
+
+
 
         public static void Update(Car car)
         {
