@@ -31,7 +31,7 @@ namespace Controllers
                 }
                 else
                 {
-                    return car;
+                    return (Car) car;
                 }
             }
         }

@@ -2,11 +2,11 @@ using Models;
 using Controllers;
 
 namespace Views{
+    public enum Option { Edit, Delete }
+
     public class Produto : Form
     {
         ListView list;
-        public int selectedCarId = -1;
-
 
         public Produto()
         {
@@ -40,7 +40,6 @@ namespace Views{
             list.Columns[6].Width = 70;
             list.Columns[7].Width = 70;
             list.FullRowSelect = true; // permite selecionar a linha inteira ao clicar
-            list.SelectedIndexChanged += new EventHandler(list_SelectedIndexChanged);
             this.Controls.Add(list);
 
             RefreshList(); 
@@ -73,7 +72,7 @@ namespace Views{
             btnClose.Click += new EventHandler(btnClose_Click);
             this.Controls.Add(btnClose);
         }
-        private void AddToListView(Models.Car car, int id)
+        private void AddToListView(Models.Car car)
         {
             string[] row = { car.Id.ToString(), car.Brand, car.Model, car.Year.ToString(), car.Color, car.LicensePlate, car.Type, car.Price.ToString() };
             ListViewItem item = new ListViewItem(row);
@@ -86,12 +85,10 @@ namespace Views{
 
             List<Models.Car> cars = Controllers.CarController.Read();
 
-            int id = 1;
 
             foreach (Models.Car car in cars)
             {
-                AddToListView(car, id);
-                id++;
+                AddToListView(car);
             }
         }
         private void btnAdd_Click(object sender, EventArgs e)
@@ -99,19 +96,20 @@ namespace Views{
             var registerCar = new Views.RegisterCar();
             registerCar.Show();
         }
-
+        
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (list.SelectedItems.Count > 0)
+
+            try
             {
-                // int id = int.Parse(list.SelectedItems[0].Text);
-                var editCar = new Views.ModifyCar();
+                Car car = SelectedIndexChanged(Option.Edit);
+                var editCar = new Views.ModifyCar(car);
                 editCar.ShowDialog();
                 RefreshList(); // update the list after editing a car
             }
-            else
+            catch (System.Exception err)
             {
-                MessageBox.Show("Please select a car to edit.");
+                MessageBox.Show(err.Message);
             }
         }
 
@@ -119,20 +117,19 @@ namespace Views{
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (list.SelectedItems.Count > 0)
+            try
             {
-                int id = int.Parse(list.SelectedItems[0].Text);
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this car?", "Confirm Delete", MessageBoxButtons.YesNo);
+                Car car = SelectedIndexChanged(Option.Delete);
+                DialogResult result = MessageBox.Show("Tem certeza que deseja deletar esse carro?", "Confirmar exclusão", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
-                    Models.Car car = Controllers.CarController.ReadById(id);
                     Controllers.CarController.Delete(car);
                     RefreshList(); 
                 }
             }
-            else
+            catch (System.Exception err)
             {
-                MessageBox.Show("Please select a car to delete.");
+                MessageBox.Show(err.Message);
             }
         }
 
@@ -140,13 +137,18 @@ namespace Views{
         {
             this.Close();
         }
-
-        public void list_SelectedIndexChanged(object sender, EventArgs e)
+        
+        
+        public Models.Car SelectedIndexChanged(Option option)
         {
             if (list.SelectedItems.Count > 0)
             {
-                selectedCarId = int.Parse(list.SelectedItems[0].Text);
-                Models.Car selectedCar = Controllers.CarController.ReadById(selectedCarId);
+                int selectedCarId = int.Parse(list.SelectedItems[0].Text);
+                return Controllers.CarController.ReadById(selectedCarId);
+            }
+            else
+            {
+                throw new System.Exception($"Por gentileza, selecione um carro para {(option == Option.Edit ? "editar" : "deletar")}");
             }
         }
     }

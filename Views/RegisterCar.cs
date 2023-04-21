@@ -7,8 +7,6 @@ namespace Views
 {
     public class RegisterCar : Form
     {
-        // public Label lblId;
-        // public TextBox txtId;
         public Label lblBrand;
         public TextBox txtBrand;
         public Label lblModel;
@@ -40,7 +38,7 @@ namespace Views
             CarController carController = new CarController();
             carController.Create(car);
 
-            MessageBox.Show("Car registered successfully!");
+            MessageBox.Show("Carro foi registrado com sucesso!");
 
             ClearForm();
 
@@ -59,7 +57,6 @@ namespace Views
 
         private void ClearForm()
         {
-            // txtId.Clear();
             txtBrand.Clear();
             txtModel.Clear();
             numYear.Value = DateTime.Now.Year;
@@ -79,17 +76,6 @@ namespace Views
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Size = new System.Drawing.Size(280, 360);
-
-            // this.lblId = new Label();
-            // this.lblId.Text = "Id:";
-            // this.lblId.Location = new System.Drawing.Point(10, 10);
-            // this.lblId.Size = new System.Drawing.Size(50, 20);
-            // this.Controls.Add(this.lblId);
-
-            // this.txtId = new TextBox();
-            // this.txtId.Location = new System.Drawing.Point(80, 10);
-            // this.txtId.Size = new System.Drawing.Size(150, 20);
-            // this.Controls.Add(this.txtId);
 
             this.lblBrand = new Label();
             this.lblBrand.Text = "Brand:";
@@ -146,7 +132,7 @@ namespace Views
             this.lblType.Size = new System.Drawing.Size(50, 20);
 
             this.cboType = new ComboBox();
-            this.cboType.Items.AddRange(new object[] { "Sedan", "Hatch", "SUV", "Picape", "Van" });
+            this.cboType.Items.AddRange(new object[] { "Sedan", "Hatch", "SUV", "Picape", "Van", "Perua","Coupê","Roadster"});
             this.cboType.Location = new System.Drawing.Point(80, 190);
             this.cboType.Size = new System.Drawing.Size(150, 20);
 
@@ -165,8 +151,7 @@ namespace Views
             this.btnRegister.Size = new System.Drawing.Size(150, 35);
             this.btnRegister.Click += new EventHandler(this.btnRegister_Click);
 
-            // this.Controls.Add(this.lblId);
-            // this.Controls.Add(this.txtId);
+
             this.Controls.Add(this.lblBrand);
             this.Controls.Add(this.txtBrand);
             this.Controls.Add(this.lblModel);

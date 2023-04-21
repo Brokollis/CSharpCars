@@ -59,3 +59,11 @@ C:\Users\User\Docs DevFac\CSharpCars\bin\Debug\net7.0-windows\Renci.SshNet.dll
 C:\Users\User\Docs DevFac\CSharpCars\bin\Debug\net7.0-windows\SshNet.Security.Cryptography.dll
 C:\Users\User\Docs DevFac\CSharpCars\bin\Debug\net7.0-windows\System.Xml.XPath.XmlDocument.dll
 C:\Users\User\Docs DevFac\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.csproj.CopyComplete
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.csproj.AssemblyReference.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.AssemblyInfoInputs.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.AssemblyInfo.cs
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.csproj.CoreCompileInputs.cache
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.dll
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\refint\CSharpCars.dll
+C:\Users\vitor.ramos\Desktop\CSharpCars\CSharpCars\obj\Debug\net7.0-windows\CSharpCars.pdb
