@@ -1,59 +1,58 @@
 using Models;
 using MyProject.Data;
 
-namespace Controllers
-{
-    public class CarController
-    {
-       public void Create(Car car){
+namespace Controllers{
+
+    public class GarageController{
+
+        public void Create(Garage garage){
             using (var context = new Context()){
-                context.Cars.Add(car);
+                context.Garages.Add(garage);
                 context.SaveChanges();
             }
         }
 
-        public static List<Car> Read()
+        public static List<Garage> Read()
         {
             using (var context = new Context())
             {
-                return context.Cars.ToList();
+                return context.Garages.ToList();
             }
         }
 
-        public static Car ReadById(int id)
+        public static Garage ReadById(int id)
         {
             using (var context = new Context())
             {
-                var car = context.Cars.Find(id);
-                if (car == null)
+                var garage = context.Garages.Find(id);
+                if (garage == null)
                 {
-                    throw new ArgumentException("Carro não encontrado");
+                    throw new ArgumentException("Garagem não encontrada");
                 }
                 else
                 {
-                    return (Car) car;
+                    return (Garage) garage;
                 }
             }
         }
 
-
-
-        public static void Update(Car car)
+        public static void Update(Garage garage)
         {
             using (var context = new Context())
             {
-                context.Cars.Update(car);
+                context.Garages.Update(garage);
                 context.SaveChanges();
             }
         }
 
-        public static void Delete(Car car)
+        public static void Delete(Garage garage)
         {
             using (var context = new Context())
             {
-                context.Cars.Remove(car);
+                context.Garages.Remove(garage);
                 context.SaveChanges();
             }
         }
+
     }
 }

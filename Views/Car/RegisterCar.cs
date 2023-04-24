@@ -1,5 +1,3 @@
-using System;
-using System.Windows.Forms;
 using Controllers;
 using Models;
 
@@ -32,7 +30,7 @@ namespace Views
                 txtColor.Text,
                 mskLicensePlate.Text,
                 cboType.SelectedItem.ToString(),
-                Convert.ToSingle(txtPrice.Text)
+                Convert.ToDecimal(txtPrice.Text)
             );
 
             CarController carController = new CarController();
@@ -45,7 +43,7 @@ namespace Views
 
 
             // atualiza a lista de carros na tela de Produto, se ela estiver aberta
-            Produto ProdutoList = Application.OpenForms.OfType<Produto>().FirstOrDefault();
+            ListCar ProdutoList = Application.OpenForms.OfType<ListCar>().FirstOrDefault();
             if (ProdutoList != null)
             {
                 ProdutoList.RefreshList();
@@ -68,7 +66,7 @@ namespace Views
 
         public RegisterCar()
         {
-            this.Text = "Car Registration";
+            this.Text = "Registar carro";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -78,7 +76,7 @@ namespace Views
             this.Size = new System.Drawing.Size(280, 360);
 
             this.lblBrand = new Label();
-            this.lblBrand.Text = "Brand:";
+            this.lblBrand.Text = "Marca:";
             this.lblBrand.Location = new System.Drawing.Point(10, 40);
             this.lblBrand.Size = new System.Drawing.Size(50, 20);
 
@@ -87,7 +85,7 @@ namespace Views
             this.txtBrand.Size = new System.Drawing.Size(150, 20);
 
             this.lblModel = new Label();
-            this.lblModel.Text = "Model:";
+            this.lblModel.Text = "Modelo:";
             this.lblModel.Location = new System.Drawing.Point(10, 70);
             this.lblModel.Size = new System.Drawing.Size(50, 20);
 
@@ -96,7 +94,7 @@ namespace Views
             this.txtModel.Size = new System.Drawing.Size(150, 20);
 
             this.lblYear = new Label();
-            this.lblYear.Text = "Year:";
+            this.lblYear.Text = "Ano:";
             this.lblYear.Location = new System.Drawing.Point(10, 100);
             this.lblYear.Size = new System.Drawing.Size(50, 20);
 
@@ -108,7 +106,7 @@ namespace Views
             this.numYear.Value = DateTime.Now.Year;
 
             this.lblColor = new Label();
-            this.lblColor.Text = "Color:";
+            this.lblColor.Text = "Cor:";
             this.lblColor.Location = new System.Drawing.Point(10, 130);
             this.lblColor.Size = new System.Drawing.Size(50, 20);
 
@@ -117,7 +115,7 @@ namespace Views
             this.txtColor.Size = new System.Drawing.Size(150, 20);
 
             this.lblLicensePlate = new Label();
-            this.lblLicensePlate.Text = "License Plate:";
+            this.lblLicensePlate.Text = "Placa:";
             this.lblLicensePlate.Location = new System.Drawing.Point(10, 160);
             this.lblLicensePlate.Size = new System.Drawing.Size(70, 20);
 
@@ -127,7 +125,7 @@ namespace Views
             this.mskLicensePlate.Size = new System.Drawing.Size(70, 20);
 
             this.lblType = new Label();
-            this.lblType.Text = "Type:";
+            this.lblType.Text = "Tipo:";
             this.lblType.Location = new System.Drawing.Point(10, 190);
             this.lblType.Size = new System.Drawing.Size(50, 20);
 
@@ -137,7 +135,7 @@ namespace Views
             this.cboType.Size = new System.Drawing.Size(150, 20);
 
             this.lblPrice = new Label();
-            this.lblPrice.Text = "Price:";
+            this.lblPrice.Text = "Preço:";
             this.lblPrice.Location = new System.Drawing.Point(10, 220);
             this.lblPrice.Size = new System.Drawing.Size(50, 20);
 
@@ -146,7 +144,7 @@ namespace Views
             this.txtPrice.Size = new System.Drawing.Size(150, 20);
 
             this.btnRegister = new Button();
-            this.btnRegister.Text = "Register";
+            this.btnRegister.Text = "Registrar";
             this.btnRegister.Location = new System.Drawing.Point(80, 260);
             this.btnRegister.Size = new System.Drawing.Size(150, 35);
             this.btnRegister.Click += new EventHandler(this.btnRegister_Click);

@@ -13,3 +13,4 @@ CREATE TABLE cars (
     PriceCar DECIMAL(10,2) NOT NULL
 );
 select * from cars;
+

@@ -28,11 +28,11 @@ namespace Models
         public string Type { get; set; }
 
         [Column("PriceCar")]
-        public float Price { get; set; }
+        public decimal Price { get; set; }
 
 
         
-        public Car(string Brand, string Model, int Year, string Color, string LicensePlate, string Type, float Price){
+        public Car(string Brand, string Model, int Year, string Color, string LicensePlate, string Type, decimal Price){
             this.Brand = Brand;
             this.Model = Model;
             this.Year = Year;

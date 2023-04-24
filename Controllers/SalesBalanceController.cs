@@ -1,57 +1,55 @@
 using Models;
 using MyProject.Data;
 
-namespace Controllers
-{
-    public class CarController
-    {
-       public void Create(Car car){
+namespace Controllers{
+
+    public class SalesBalanceController{
+
+        public static void Create(SalesBalance salesBalance){
             using (var context = new Context()){
-                context.Cars.Add(car);
+                context.SalesBalances.Add(salesBalance);
                 context.SaveChanges();
             }
         }
 
-        public static List<Car> Read()
+        public static List<SalesBalance> Read()
         {
             using (var context = new Context())
             {
-                return context.Cars.ToList();
+                return context.SalesBalances.ToList();
             }
         }
 
-        public static Car ReadById(int id)
+        public static SalesBalance ReadById(int id)
         {
             using (var context = new Context())
             {
-                var car = context.Cars.Find(id);
-                if (car == null)
+                var salesBalance = context.SalesBalances.Find(id);
+                if (salesBalance == null)
                 {
                     throw new ArgumentException("Carro não encontrado");
                 }
                 else
                 {
-                    return (Car) car;
+                    return (SalesBalance) salesBalance;
                 }
             }
         }
 
-
-
-        public static void Update(Car car)
+        public static void Update(SalesBalance salesBalance)
         {
             using (var context = new Context())
             {
-                context.Cars.Update(car);
+                context.SalesBalances.Update(salesBalance);
                 context.SaveChanges();
             }
         }
 
-        public static void Delete(Car car)
+        public static void Delete(SalesBalance salesBalance)
         {
             using (var context = new Context())
             {
-                context.Cars.Remove(car);
+                context.SalesBalances.Remove(salesBalance);
                 context.SaveChanges();
             }
         }
