@@ -110,7 +110,7 @@ namespace Views{
             listGarage.Columns[0].Width = 30;
             listGarage.Columns[1].Width = 150;
             listGarage.Columns[2].Width = 350;
-            listGarage.FullRowSelect = true; // permite selecionar a linha inteira ao clicar
+            listGarage.FullRowSelect = true; 
             this.Controls.Add(listGarage);
 
             RefreshList();

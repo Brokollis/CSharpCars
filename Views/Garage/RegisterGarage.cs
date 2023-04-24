@@ -19,9 +19,7 @@ namespace Views{
                 txtAddress.Text
             );
 
-            GarageController garageController = new GarageController();
-            garageController.Create(garage);
-
+            GarageController.Create(garage);
             MessageBox.Show("Garagem foi registrada com sucesso!");
 
             ClearForm();

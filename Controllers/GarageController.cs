@@ -5,7 +5,7 @@ namespace Controllers{
 
     public class GarageController{
 
-        public void Create(Garage garage){
+        public static void Create(Garage garage){
             using (var context = new Context()){
                 context.Garages.Add(garage);
                 context.SaveChanges();
