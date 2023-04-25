@@ -37,7 +37,20 @@ namespace Views{
             carToModify.Type = this.cboType.Text;
             carToModify.Price = Convert.ToDecimal(this.txtPrice.Text);
 
-            CarController.Update(carToModify);
+            if(
+                carToModify.Brand == "" || carToModify.Model == "" || carToModify.Color == "" || carToModify.LicensePlate == "" ||  carToModify.Type == "" || carToModify.Price == 0){
+                MessageBox.Show("Preencha todos os campos!");
+                return;
+
+            }else if(VerifyLicensePlate()){
+                MessageBox.Show("Placa já cadastrada, favor escolha outra!");
+                return;
+
+            }else{
+                CarController.Update(carToModify);
+                MessageBox.Show("Carro foi modificado com sucesso!");
+            }
+
             ListCar ProdutoList = Application.OpenForms.OfType<ListCar>().FirstOrDefault();
             if (ProdutoList != null)
             {
@@ -45,11 +58,21 @@ namespace Views{
             }
             this.Close();            
         }
+        public bool VerifyLicensePlate(){
+                
+            foreach(Car car in CarController.Read()){
+                if(car.LicensePlate == this.mskLicensePlate.Text){
+                    return true;
+                }
+            }
+            return false;
+        }
         
         public ModifyCar(Car car){
 
             this.car = car;
 
+            this.Icon = new Icon("Assets/iconEdit.ico", 52,52);
             this.Text = "Modificar Carro";
             this.Size = new System.Drawing.Size(280, 360);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -150,7 +173,7 @@ namespace Views{
             this.btnModify.Text = "Modificar";
             this.btnModify.Location = new System.Drawing.Point(80, 260);
             this.btnModify.Size = new System.Drawing.Size(150, 35);
-            this.btnModify.Click += new EventHandler(this.btnModify_Click);
+            this.btnModify.Click += new EventHandler(btnModify_Click);
             this.Controls.Add(this.btnModify);
             
         }

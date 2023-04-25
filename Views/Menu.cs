@@ -9,6 +9,7 @@ namespace Views
         {
             Form menu = new Form();
 
+            menu.Icon = new Icon("Assets/iconHome.ico", 52,52);
             menu.Text = "Menu";
             menu.Size = new Size(250, 300);
             menu.StartPosition = FormStartPosition.CenterScreen;

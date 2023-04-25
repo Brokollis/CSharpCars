@@ -18,10 +18,10 @@ namespace Models{
         public Garage Garage {get; set;}
 
         [Column("AmountSalesBalance")]
-        public decimal Amount { get; set; }
+        public int Amount { get; set; }
 
 
-        public SalesBalance(int CarId, int GarageId, decimal Amount){
+        public SalesBalance(int CarId, int GarageId, int Amount){
             this.CarId = CarId;
             this.GarageId = GarageId;
             this.Amount = Amount;

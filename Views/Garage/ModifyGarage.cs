@@ -40,8 +40,8 @@ namespace Views{
 
             this.garage = garage;
 
+            this.Icon = new Icon("Assets/iconEdit.ico", 52,52);
             this.Text = "Editar garagem";
-
             this.Size = new Size(300, 190);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

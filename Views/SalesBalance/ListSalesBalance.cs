@@ -56,18 +56,22 @@ namespace Views{
             Car nameCarId = CarController.ReadById(salesBalance.CarId);
             Garage nameGarageId = GarageController.ReadById(salesBalance.GarageId);
 
+            string amountFormatted = salesBalance.Amount.ToString() + "Un";
+            DateTime currentDate = DateTime.Now;
+            string currentDateToStr = currentDate.ToString("dd/MM/yyyy");
+
+
             string[] row = { 
                 salesBalance.Id.ToString(),
                 nameCarId.Model,
                 nameGarageId.Name,
-                salesBalance.Amount.ToString()
+                amountFormatted,
+                currentDateToStr
             };
             ListViewItem item = new ListViewItem(row);
             listSalesBalance.Items.Add(item);
 
         }
-
-
 
         public void RefreshList()
         {
@@ -102,6 +106,8 @@ namespace Views{
         }
 
         public ListSalesBalance(){
+
+            this.Icon = new Icon("Assets/iconEdit.ico", 52,52);
             this.Text = "Balanços dos saldos";
             this.Size = new Size(720, 370);
             this.StartPosition = FormStartPosition.CenterScreen;
@@ -121,10 +127,12 @@ namespace Views{
             listSalesBalance.Columns.Add("Carro");
             listSalesBalance.Columns.Add("Garagem");
             listSalesBalance.Columns.Add("Saldo");
+            listSalesBalance.Columns.Add("Data");
             listSalesBalance.Columns[0].Width = 30;
-            listSalesBalance.Columns[1].Width = 80;
-            listSalesBalance.Columns[2].Width = 100;
-            listSalesBalance.Columns[3].Width = 50;
+            listSalesBalance.Columns[1].Width = 150;
+            listSalesBalance.Columns[2].Width = 150;
+            listSalesBalance.Columns[3].Width = 170;
+            listSalesBalance.Columns[4].Width = 100;
             listSalesBalance.FullRowSelect = true; // permite selecionar a linha inteira ao clicar
             this.Controls.Add(listSalesBalance);
 

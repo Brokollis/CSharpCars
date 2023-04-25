@@ -23,7 +23,23 @@ namespace Views
 
         public void btnRegister_Click(object sender, EventArgs e)
         {
-            Models.Car car = new Car(
+            if(
+                txtBrand.Text == "" ||
+                txtModel.Text == "" ||
+                txtColor.Text == "" ||
+                mskLicensePlate.Text == "" ||
+                txtPrice.Text == ""
+            ){
+                MessageBox.Show("Preencha todos os campos!");
+                return;
+
+            }else if(VerifyLicensePlate()){
+                MessageBox.Show("Placa já cadastrada, favor escolha outra!");
+                return;
+
+            }else{
+                
+                Models.Car car = new Car(
                 txtBrand.Text,
                 txtModel.Text,
                 (int)numYear.Value,
@@ -31,28 +47,32 @@ namespace Views
                 mskLicensePlate.Text,
                 cboType.SelectedItem.ToString(),
                 Convert.ToDecimal(txtPrice.Text)
-            );
+                );
 
-            CarController carController = new CarController();
-            carController.Create(car);
+                CarController carController = new CarController();
+                carController.Create(car);
 
-            MessageBox.Show("Carro foi registrado com sucesso!");
+                MessageBox.Show("Carro foi registrado com sucesso!");
+                ClearForm();
+            }
 
-            ClearForm();
-
-
-
-            // atualiza a lista de carros na tela de Produto, se ela estiver aberta
             ListCar ProdutoList = Application.OpenForms.OfType<ListCar>().FirstOrDefault();
             if (ProdutoList != null)
             {
                 ProdutoList.RefreshList();
             }
-
-            // fecha a tela de cadastro
             this.Close();
         }
-
+        
+        public bool VerifyLicensePlate(){
+                
+            foreach(Car car in CarController.Read()){
+                if(car.LicensePlate == this.mskLicensePlate.Text){
+                    return true;
+                }
+            }
+            return false;
+        }
         private void ClearForm()
         {
             txtBrand.Clear();
@@ -66,6 +86,7 @@ namespace Views
 
         public RegisterCar()
         {
+            this.Icon = new Icon("Assets/iconAdd.ico", 52,52);
             this.Text = "Registar carro";
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;

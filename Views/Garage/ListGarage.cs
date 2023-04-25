@@ -52,7 +52,11 @@ namespace Views{
 
         private void AddToListView(Models.Garage garage)
         {
-            string[] row = { garage.Id.ToString(), garage.Name, garage.Address };
+            string[] row = { 
+                garage.Id.ToString(), 
+                garage.Name, 
+                garage.Address 
+            };
             ListViewItem item = new ListViewItem(row);
             listGarage.Items.Add(item);
         }
@@ -90,7 +94,7 @@ namespace Views{
             this.Icon = new Icon("Assets/iconGarage.ico", 52,52);
 
             this.Text = "Garagens";
-            this.Size = new Size(720, 370);
+            this.Size = new Size(720, 380);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = true;
@@ -99,7 +103,7 @@ namespace Views{
             this.ShowInTaskbar = true;
 
             listGarage = new ListView();
-            listGarage.Size = new Size(605, 180);
+            listGarage.Size = new Size(605, 200);
             listGarage.Location = new Point(50, 50);
             listGarage.GridLines = true;
             listGarage.MultiSelect = true;
@@ -108,8 +112,8 @@ namespace Views{
             listGarage.Columns.Add("Nome");
             listGarage.Columns.Add("Endereço");
             listGarage.Columns[0].Width = 30;
-            listGarage.Columns[1].Width = 150;
-            listGarage.Columns[2].Width = 350;
+            listGarage.Columns[1].Width = 200;
+            listGarage.Columns[2].Width = 370;
             listGarage.FullRowSelect = true; 
             this.Controls.Add(listGarage);
 

@@ -19,12 +19,18 @@ namespace Views{
                 txtAddress.Text
             );
 
-            GarageController.Create(garage);
-            MessageBox.Show("Garagem foi registrada com sucesso!");
+            if( txtName.Text == "" || txtAddress.Text == ""){
 
-            ClearForm();
-            RefreshList();
-            this.Close();
+                MessageBox.Show("Preencha todos os campos!");
+                return;
+            }else{
+                
+                GarageController.Create(garage);
+                MessageBox.Show("Garagem foi registrada com sucesso!");
+                ClearForm();
+                RefreshList();
+                this.Close();
+            }
         }
 
         private void ClearForm()
@@ -43,7 +49,7 @@ namespace Views{
 
         public RegisterGarage(){
 
-            this.Icon = new Icon("Assets/iconCar.ico", 52,52);
+            this.Icon = new Icon("Assets/iconAdd.ico", 52,52);
 
             this.Text = "Cadastro de Garagem";
             this.Size = new Size(300, 190);

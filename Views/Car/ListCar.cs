@@ -11,6 +11,8 @@ namespace Views{
 
          private void AddToListView(Models.Car car)
         {
+            string priceFormattedStr = string.Format("R$: {0:#,##0.00}", car.Price);
+
             string[] row = { 
                 car.Id.ToString(), 
                 car.Brand, 
@@ -19,7 +21,7 @@ namespace Views{
                 car.Color, 
                 car.LicensePlate, 
                 car.Type, 
-                car.Price.ToString() 
+                priceFormattedStr
             };
             ListViewItem item = new ListViewItem(row);
             listCar.Items.Add(item);
@@ -75,9 +77,16 @@ namespace Views{
                     RefreshList();
                 }
             }
-            catch (System.Exception err)
+           catch (System.Exception ex)
             {
-                MessageBox.Show(err.Message);
+                if (ex.InnerException != null)
+                {
+                    MessageBox.Show(ex.InnerException.Message);
+                }
+                else
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
 
@@ -106,7 +115,7 @@ namespace Views{
 
 
             this.Text = "Carros";
-            this.Size = new Size(720, 370);
+            this.Size = new Size(800, 450);
             this.StartPosition = FormStartPosition.CenterScreen;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = true;
@@ -115,7 +124,7 @@ namespace Views{
             this.ShowInTaskbar = true;
 
             listCar = new ListView();
-            listCar.Size = new Size(605, 180);
+            listCar.Size = new Size(680, 260);
             listCar.Location = new Point(50, 50);
             listCar.GridLines = true;
             listCar.MultiSelect = true;
@@ -129,13 +138,13 @@ namespace Views{
             listCar.Columns.Add("Tipo");
             listCar.Columns.Add("Preço");
             listCar.Columns[0].Width = 30;
-            listCar.Columns[1].Width = 80;
-            listCar.Columns[2].Width = 100;
+            listCar.Columns[1].Width = 100;
+            listCar.Columns[2].Width = 120;
             listCar.Columns[3].Width = 50;
             listCar.Columns[4].Width = 80;
             listCar.Columns[5].Width = 100;
             listCar.Columns[6].Width = 70;
-            listCar.Columns[7].Width = 70;
+            listCar.Columns[7].Width = 126;
             listCar.FullRowSelect = true; // permite selecionar a linha inteira ao clicar
             this.Controls.Add(listCar);
 
@@ -144,28 +153,28 @@ namespace Views{
             Button btnAdd = new Button();
             btnAdd.Text = "Adicionar";
             btnAdd.Size = new Size(100, 30);
-            btnAdd.Location = new Point(50, 270);
+            btnAdd.Location = new Point(50, 330);
             btnAdd.Click += new EventHandler(btnAdd_Click);
             this.Controls.Add(btnAdd);
 
             Button btnEdit = new Button();
             btnEdit.Text = "Editar";
             btnEdit.Size = new Size(100, 30);
-            btnEdit.Location = new Point(170, 270);
+            btnEdit.Location = new Point(170, 330);
             btnEdit.Click += new EventHandler(btnUpdate_Click);
             this.Controls.Add(btnEdit);
 
             Button btnDelete = new Button();
             btnDelete.Text = "Deletar";
             btnDelete.Size = new Size(100, 30);
-            btnDelete.Location = new Point(290, 270);
+            btnDelete.Location = new Point(290, 330);
             btnDelete.Click += new EventHandler(btnDelete_Click);
             this.Controls.Add(btnDelete);
 
             Button btnClose = new Button();
             btnClose.Text = "Fechar";
             btnClose.Size = new Size(100, 30);
-            btnClose.Location = new Point(550, 270);
+            btnClose.Location = new Point(630, 330);
             btnClose.Click += new EventHandler(btnClose_Click);
             this.Controls.Add(btnClose);
         }
