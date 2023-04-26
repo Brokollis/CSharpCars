@@ -39,10 +39,13 @@ namespace Views{
             this.Close();
         }
 
+
         
         private void btnCancel_Click(object sender, EventArgs e){
             this.Close();
         }
+
+        
         public ModifySalesBalance(SalesBalance salesBalance){
 
             this.salesBalance = salesBalance;
@@ -63,7 +66,7 @@ namespace Views{
             this.lblCarId.Size = new System.Drawing.Size(90, 20);
             this.Controls.Add(lblCarId);
 
-            List<string> namesOfCars = GetCarModelNames();
+            List<string> namesOfCars = RegisterSalesBalance.GetCarModelNames();
             this.cboCarId = new ComboBox();
             this.cboCarId.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cboCarId.Items.AddRange(namesOfCars.ToArray());
@@ -82,7 +85,7 @@ namespace Views{
             this.lblGarageId.Size = new System.Drawing.Size(90, 20);
             this.Controls.Add(lblGarageId);
 
-            List<string> nameOfGarages = GetGarageNames();
+            List<string> nameOfGarages = RegisterSalesBalance.GetGarageNames();
             this.cboGarageId = new ComboBox();
             this.cboGarageId.DropDownStyle = ComboBoxStyle.DropDownList;
             this.cboGarageId.Items.AddRange(nameOfGarages.ToArray());

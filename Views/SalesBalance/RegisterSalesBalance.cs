@@ -62,7 +62,7 @@ namespace Views{
             return -1;
         }
 
-        public List<string> GetCarModelNames(){
+        public static List<string> GetCarModelNames(){
 
             List<string> namesOfCars = new List<string>();
 
@@ -73,7 +73,7 @@ namespace Views{
             return namesOfCars;
         }
 
-        public List<string> GetGarageNames(){
+        public static List<string> GetGarageNames(){
 
             List<string> namesOfGarages = new List<string>();
 
