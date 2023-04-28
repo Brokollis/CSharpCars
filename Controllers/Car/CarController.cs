@@ -5,10 +5,18 @@ namespace Controllers
 {
     public class CarController
     {
-       public void Create(Car car){
-            using (var context = new Context()){
-                context.Cars.Add(car);
-                context.SaveChanges();
+       public static void Create(Car car){
+
+            CarValidation.ValidateYear(car);
+            if(!CarValidation.IsCarInputEmpty(car)){
+                using (var context = new Context()){
+                    context.Cars.Add(car);
+                    context.SaveChanges();
+                }
+                MessageBox.Show("Carro foi registrado com sucesso!");
+            }else{
+                MessageBox.Show("Preencha todos os campos!");
+                return;
             }
         }
 

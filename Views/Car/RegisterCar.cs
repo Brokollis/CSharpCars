@@ -23,23 +23,7 @@ namespace Views
 
         public void btnRegister_Click(object sender, EventArgs e)
         {
-            if(
-                txtBrand.Text == "" ||
-                txtModel.Text == "" ||
-                txtColor.Text == "" ||
-                mskLicensePlate.Text == "" ||
-                txtPrice.Text == ""
-            ){
-                MessageBox.Show("Preencha todos os campos!");
-                return;
-
-            }else if(VerifyLicensePlate()){
-                MessageBox.Show("Placa já cadastrada, favor escolha outra!");
-                return;
-
-            }else{
-                
-                Models.Car car = new Car(
+            Models.Car car = new Car(
                 txtBrand.Text,
                 txtModel.Text,
                 (int)numYear.Value,
@@ -47,14 +31,17 @@ namespace Views
                 mskLicensePlate.Text,
                 cboType.SelectedItem.ToString(),
                 Convert.ToDecimal(txtPrice.Text)
-                );
-
-                CarController carController = new CarController();
-                carController.Create(car);
-
-                MessageBox.Show("Carro foi registrado com sucesso!");
+            );
+            try{
+                Controllers.CarController.Create(car);
                 ClearForm();
+
+            }catch(Exception ex){
+
+                MessageBox.Show(ex.Message);
+
             }
+            
 
             ListCar ProdutoList = Application.OpenForms.OfType<ListCar>().FirstOrDefault();
             if (ProdutoList != null)
@@ -63,16 +50,7 @@ namespace Views
             }
             this.Close();
         }
-        
-        public bool VerifyLicensePlate(){
-                
-            foreach(Car car in CarController.Read()){
-                if(car.LicensePlate == this.mskLicensePlate.Text){
-                    return true;
-                }
-            }
-            return false;
-        }
+    
         private void ClearForm()
         {
             txtBrand.Clear();

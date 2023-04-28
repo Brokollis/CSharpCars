@@ -153,6 +153,8 @@ namespace Views{
             this.cboCarId.Location = new System.Drawing.Point(110, 40);
             this.cboCarId.Size = new System.Drawing.Size(150, 20);
             this.Controls.Add(cboCarId);
+            // this.cboCarId.ValueMember("d");
+            // this.cboCarId.DisplayMember("Model");
 
             this.txtCarId = new TextBox();
             this.txtCarId.Location = new System.Drawing.Point(110, 40);
