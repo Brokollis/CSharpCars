@@ -15,6 +15,7 @@ namespace Models{
         [Column("AddressGarage")]
         public string Address { get; set; }
 
+
         public Garage(string Name, string Address){
             this.Name = Name;
             this.Address = Address;

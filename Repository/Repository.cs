@@ -10,6 +10,7 @@ namespace MyProject.Data
         public DbSet<Models.Garage> Garages {get; set;}
         public DbSet<Models.SalesBalance> SalesBalances {get; set;}
 
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = "server=localhost;database=csharpcarsmanager;user=root;password=Wheniparkmyrr_1234";
