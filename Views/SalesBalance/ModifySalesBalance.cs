@@ -19,11 +19,8 @@ namespace Views{
 
         private void btnModify_Click(object sender, EventArgs e){
 
-            int carId = RegisterSalesBalance.GetCarIdFromName(cboCarId.Text);
-            int garageId = RegisterSalesBalance.GetGarageIdFromName(cboGarageId.Text);
-
-            salesBalance.CarId = Convert.ToInt32(txtCarId.Text);
-            salesBalance.GarageId = Convert.ToInt32(txtGarageId.Text);
+            salesBalance.CarId = Convert.ToInt32(cboCarId.SelectedValue);
+            salesBalance.GarageId = Convert.ToInt32(cboGarageId.SelectedValue);
             salesBalance.Amount = Convert.ToInt32(txtAmount.Text);
             
             SalesBalanceController.Update(salesBalance);
@@ -66,18 +63,23 @@ namespace Views{
             this.lblCarId.Size = new System.Drawing.Size(90, 20);
             this.Controls.Add(lblCarId);
 
-            List<string> namesOfCars = RegisterSalesBalance.GetCarModelNames();
             this.cboCarId = new ComboBox();
             this.cboCarId.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cboCarId.Items.AddRange(namesOfCars.ToArray());
             this.cboCarId.Location = new System.Drawing.Point(110, 40);
             this.cboCarId.Size = new System.Drawing.Size(150, 20);
+            this.cboCarId.DisplayMember = "Model";
+            this.cboCarId.ValueMember = "Id";
+            this.cboCarId.DataSource = RegisterSalesBalance.GetNameCarToComboBox();
+            foreach (Car car in cboCarId.Items)
+            {
+                if (car.Id == salesBalance.CarId)
+                {
+                    cboCarId.SelectedItem = car;
+                    break;
+                }
+            }
             this.Controls.Add(cboCarId);
 
-            this.txtCarId = new TextBox();
-            this.txtCarId.Location = new System.Drawing.Point(110, 40);
-            this.txtCarId.Size = new System.Drawing.Size(150, 20);
-            this.Controls.Add(txtCarId);
 
             this.lblGarageId = new Label();
             this.lblGarageId.Text = "Id da garagem";
@@ -85,19 +87,16 @@ namespace Views{
             this.lblGarageId.Size = new System.Drawing.Size(90, 20);
             this.Controls.Add(lblGarageId);
 
-            List<string> nameOfGarages = RegisterSalesBalance.GetGarageNames();
+     
             this.cboGarageId = new ComboBox();
+            this.cboGarageId.SelectedValue = salesBalance.GarageId.ToString();
             this.cboGarageId.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cboGarageId.Items.AddRange(nameOfGarages.ToArray());
             this.cboGarageId.Location = new System.Drawing.Point(110, 70);
             this.cboGarageId.Size = new System.Drawing.Size(150, 20);
+            this.cboGarageId.DisplayMember = "Name";
+            this.cboGarageId.ValueMember = "Id";
+            this.cboGarageId.DataSource = RegisterSalesBalance.GetNameGarageToComboBox();
             this.Controls.Add(cboGarageId);
-
-            this.txtGarageId = new TextBox();
-            this.txtGarageId.Location = new System.Drawing.Point(110, 70);
-            this.txtGarageId.Size = new System.Drawing.Size(150, 20);
-            this.Controls.Add(txtGarageId);
-
 
             this.lblAmount = new Label();
             this.lblAmount.Text = "Quantidade";

@@ -17,12 +17,9 @@ namespace Views{
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            int carId = GetCarIdFromName(cboCarId.Text);
-            int garageId = GetGarageIdFromName(cboGarageId.Text);
-
             Models.SalesBalance salesBalance = new SalesBalance(
-                carId,
-                garageId,
+                Convert.ToInt32(cboCarId.SelectedValue),
+                Convert.ToInt32(cboGarageId.SelectedValue),
                 Convert.ToInt32(txtAmount.Text)
             );
 
@@ -34,84 +31,26 @@ namespace Views{
             this.Close();
         }
 
-        public static int GetCarIdFromName(string carName)
-        {
-            foreach (Car car in CarController.Read())
-            {
-                if (car.Model == carName)
-                {
-                    return car.Id;
-                }
-            }
-
-            // Caso não tenha encontrado nenhum carro correspondente, retornar -1 ou lançar uma exceção
-            return -1;
-        }
-
-        public static int GetGarageIdFromName(string garageName)
-        {
-            foreach (Garage garage in GarageController.Read())
-            {
-                if (garage.Name == garageName)
-                {
-                    return garage.Id;
-                }
-            }
-
-            // Caso não tenha encontrado nenhuma garagem correspondente, retornar -1 ou lançar uma exceção
-            return -1;
-        }
-
-        public static List<string> GetCarModelNames(){
-
-            List<string> namesOfCars = new List<string>();
-
+        public static List<Car> GetNameCarToComboBox(){
+            List<Car> cars = new List<Car>();
             foreach(Car car in CarController.Read()){
-                namesOfCars.Add(car.Model);
-            }
-
-            return namesOfCars;
-        }
-
-        public static List<string> GetGarageNames(){
-
-            List<string> namesOfGarages = new List<string>();
-
-            foreach(Garage garage in GarageController.Read()){
-                namesOfGarages.Add(garage.Name);
-            }
-
-            return namesOfGarages;
-        }
-
-        public void GetIdCarName(){
-            List<string> carModelNames = GetCarModelNames();
-            if (!carModelNames.Contains(cboCarId.Text))
-            {
-                MessageBox.Show("Modelo de carro inválido!");
-                return;
-            }
-            
-            foreach(Car car in CarController.Read()){
-                if(car.Model == cboCarId.Text){
-                    cboCarId.Text = car.Id.ToString();
+                if((car.Id != 0) && (car.Model != null)){
+                    cars.Add(car);
                 }
             }
+
+            return cars;
         }
 
-        public void GetIdGarageName(){
-            List<string> garageNames = GetGarageNames();
-            if (!garageNames.Contains(cboGarageId.Text))
-            {
-                MessageBox.Show("Nome de garagem inválido!");
-                return;
-            }
-            
+        public static List<Garage> GetNameGarageToComboBox(){
+            List<Garage> garages = new List<Garage>();
             foreach(Garage garage in GarageController.Read()){
-                if(garage.Name == cboGarageId.Text){
-                    cboGarageId.Text = garage.Id.ToString();
+                if((garage.Id != 0) && (garage.Name != null)){
+                    garages.Add(garage);
                 }
             }
+
+            return garages;
         }
 
         private void RefreshList(){
@@ -146,15 +85,14 @@ namespace Views{
             this.lblCarId.Size = new System.Drawing.Size(90, 20);
             this.Controls.Add(lblCarId);
 
-            List<string> namesOfCars = GetCarModelNames();
             this.cboCarId = new ComboBox();
             this.cboCarId.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cboCarId.Items.AddRange(namesOfCars.ToArray());
             this.cboCarId.Location = new System.Drawing.Point(110, 40);
             this.cboCarId.Size = new System.Drawing.Size(150, 20);
+            this.cboCarId.ValueMember= "Id";
+            this.cboCarId.DisplayMember = "Model";
+            this.cboCarId.DataSource = GetNameCarToComboBox();
             this.Controls.Add(cboCarId);
-            // this.cboCarId.ValueMember("d");
-            // this.cboCarId.DisplayMember("Model");
 
             this.txtCarId = new TextBox();
             this.txtCarId.Location = new System.Drawing.Point(110, 40);
@@ -167,12 +105,13 @@ namespace Views{
             this.lblGarageId.Size = new System.Drawing.Size(90, 20);
             this.Controls.Add(lblGarageId);
 
-            List<string> nameOfGarages = GetGarageNames();
             this.cboGarageId = new ComboBox();
             this.cboGarageId.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.cboGarageId.Items.AddRange(nameOfGarages.ToArray());
             this.cboGarageId.Location = new System.Drawing.Point(110, 70);
             this.cboGarageId.Size = new System.Drawing.Size(150, 20);
+            this.cboGarageId.ValueMember= "Id";
+            this.cboGarageId.DisplayMember = "Name";
+            this.cboGarageId.DataSource = GetNameGarageToComboBox();
             this.Controls.Add(cboGarageId);
 
             this.txtGarageId = new TextBox();

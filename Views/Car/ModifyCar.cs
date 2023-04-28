@@ -41,11 +41,7 @@ namespace Views{
                 carToModify.Brand == "" || carToModify.Model == "" || carToModify.Color == "" || carToModify.LicensePlate == "" ||  carToModify.Type == "" || carToModify.Price == 0){
                 MessageBox.Show("Preencha todos os campos!");
                 return;
-
-            }else if(VerifyLicensePlate()){
-                MessageBox.Show("Placa já cadastrada, favor escolha outra!");
-                return;
-
+                
             }else{
                 CarController.Update(carToModify);
                 MessageBox.Show("Carro foi modificado com sucesso!");
@@ -57,15 +53,6 @@ namespace Views{
                 ProdutoList.RefreshList();
             }
             this.Close();            
-        }
-        public bool VerifyLicensePlate(){
-                
-            foreach(Car car in CarController.Read()){
-                if(car.LicensePlate == this.mskLicensePlate.Text){
-                    return true;
-                }
-            }
-            return false;
         }
         
         public ModifyCar(Car car){
